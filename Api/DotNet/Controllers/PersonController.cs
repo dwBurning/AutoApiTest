@@ -63,7 +63,7 @@ namespace AutoApiTest.Controllers
         /// </summary>
         /// <param name="person"></param>
         /// <returns></returns>
-        [HttpPatch]
+        [HttpPatch("{id}")]
         public OutPut<string> Patch(Person person)
         {
             var p = peoples.Find(x => x.Id == person.Id);
