@@ -3,8 +3,6 @@ package controller
 import (
 	"api/model"
 	"api/response"
-	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -14,12 +12,11 @@ import (
 var persons = make(map[int]model.Person)
 
 func Get(ctx *gin.Context) {
-	b, err := json.Marshal(persons)
-	if err != nil {
-		fmt.Println("JSON ERR:", err)
+	var ps []model.Person
+	for _, v := range persons {
+		ps = append(ps, v)
 	}
-
-	ctx.JSON(http.StatusOK, response.New(0, "获取成功", string(b)))
+	ctx.JSON(http.StatusOK, response.New(0, "获取成功", ps))
 }
 
 func GetById(ctx *gin.Context) {
